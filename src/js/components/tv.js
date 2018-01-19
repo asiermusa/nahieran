@@ -15,13 +15,13 @@ const filtering = (ul) => {
     let json = JSON.parse( localStorage.getItem('localJson')),
       lista = null,
       tpl = ''
-  
+
     lista = json.member.filter( list => {
       return list.title.toLowerCase().includes(e.target.value.toLowerCase())
     })
-  
+
     lista.forEach(json => {
-      tpl += 
+      tpl +=
       `
       <li>
         <a href="#" class="program-id" data-program="${json["@id"]}">
@@ -30,7 +30,7 @@ const filtering = (ul) => {
       </li>
       `
     })
-  
+
     d.querySelector(ul).innerHTML = tpl
     d.querySelector('.tv__header').innerHTML = `<span class="tv__number">${lista.length}</span> saio erakusten`
   })
@@ -43,14 +43,14 @@ export const tv = () => {
     if ( d.readyState  === 'complete' ) {
 
       clearInterval(readyState)
-      
+
       //Programa erakutsi (buklea)
       function getPrograms(json) {
 
         let tpl = ''
-        
+
         JSON.parse(json).member.forEach(json => {
-  
+
           tpl += `
             <li>
               <a href="#" class="program-id" data-program="${json["@id"]}">
@@ -59,7 +59,7 @@ export const tv = () => {
             </li>
             `
         })
-  
+
         d.querySelector('.tv__list').innerHTML = tpl
         d.querySelector('.tv__header').innerHTML = `Saio guztiak erakusten <span class="tv__number">(${JSON.parse( json ).member.length})</span>`
         //Loader ezkutatu
@@ -68,12 +68,12 @@ export const tv = () => {
         //Footerrean APIaren eguneraketa data bistaratu
         d.querySelector('.main-footer__text').classList.add('is-cache')
       }
-      
+
       //Programak ekarri
       function fetchAllPrograms(data, requestFromBGSync, reset) {
 
         let tpl = ''
-        
+
         //Loader erakutsi
         d.querySelector('.loader-template-tv').classList.add('loader-show')
         d.querySelector('.loader-tv').classList.add('loader-show')
@@ -83,7 +83,7 @@ export const tv = () => {
         })
         d.querySelector('.categories').classList.remove('u-hide')
         d.querySelector('.tv').classList.remove('u-hide')
-        
+
         //APIa deitu behar bada...
         if(reset) {
 
@@ -121,17 +121,17 @@ export const tv = () => {
             .catch(err => {
               localStorage.setItem('tv', data)
           })
-          
+
         //Programak local-ean gordeta badago
         }else{
           getPrograms(data)
         }
-        
+
       }//fetchAllPrograms
 
       //Filtroa egin
       filtering('.tv__list')
-      
+
       //Gordetako APIa ezabatu eta berria ekartzeko - EZABATU
       d.querySelector('.deleteStorage').addEventListener('click', (e) => {
 
@@ -139,17 +139,17 @@ export const tv = () => {
         if ( confirm('Programa zerrenda eguneratu nahi al duzu?') == true) {
           localStorage.removeItem('localJson')
           localStorage.removeItem('jsonDate')
-          
+
           //Bideo martxan badago ere, geratu
           d.getElementById("video").pause()
-          
+
           let reset = true,
-            data= 'http://still-castle-99749.herokuapp.com/playlist'
-          
+            data= '//still-castle-99749.herokuapp.com/playlist'
+
           localStorage.setItem('tv', data)
-          
+
           fetchAllPrograms(data, false, reset)
-          
+
           //Background Sync (programak)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
             function registerBGSync () {
@@ -170,20 +170,20 @@ export const tv = () => {
         fetchAllPrograms(localStorage.getItem('localJson'), false, false)
       }else{
         let reset = true,
-          data= 'http://still-castle-99749.herokuapp.com/playlist'
-          
+          data= '//still-castle-99749.herokuapp.com/playlist'
+
         localStorage.setItem('tv', data)
 
         fetchAllPrograms(data, false, reset)
-        
+
         //Background Sync (programak)
         if ( 'serviceWorker' in n && 'SyncManager' in w ) {
           function registerBGSync () {
             n.serviceWorker.ready
             .then(registration => {
               return registration.sync.register('nahieran-tv')
-                .then( () => c('Sincronización de Fondo Registrada') )
-                .catch( err => c('Fallo la Sincronización de Fondo', err) )
+                .then( () => c('Sincronizaciï¿½n de Fondo Registrada') )
+                .catch( err => c('Fallo la Sincronizaciï¿½n de Fondo', err) )
             })
           }
           registerBGSync()
