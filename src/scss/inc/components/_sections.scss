@@ -1,0 +1,23 @@
+@keyframes fade-in {
+  0% { 
+	  opacity: 0;
+  }
+  100% { 
+	 opacity: 1;
+  }
+}
+
+.section {
+	margin: 58px 0 115px 0;
+	animation: fade-in 1s;
+	
+	@include from(sm) {
+		margin-bottom: 125px;
+	}
+	
+	&-header {
+		padding: 2em 1em;
+		border-bottom: 1px solid rgba(#000000,.15);
+		line-height: 20px;
+	}
+}

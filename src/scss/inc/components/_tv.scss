@@ -1,0 +1,53 @@
+.tv {
+	&__form {
+		background: linear-gradient(90deg, $primary, $secondary);
+		color: #ffffff;
+		padding: 2em 1em;
+		text-align: center;
+	}
+	
+	&__input {
+		padding: 1.5em 1em;
+		border: 0;
+		border-radius: 5px;
+		width: 100%;
+		font-size: 1em;
+		color: #222222;
+		outline: 0;
+		
+		&::placeholder {
+			color: rgba($primary,.5)
+		}
+	}
+	
+	&__title {
+		font-size: 1.2em;
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
+	
+	&__number{
+		color: $primary;
+		font-weight: bold;
+	}
+	
+	&__list {
+		list-style: none;
+		
+		li {
+			border-bottom: 1px solid rgba(#000000,.1);
+			
+			a {
+				display: block;
+				padding: 1.5em 1em;
+				font-weight: bold;
+				color: #222222;
+				transition: all .3s;
+				
+				&:hover {
+					background: rgba(#000000,.03);
+				}
+			}
+		}
+	}
+}

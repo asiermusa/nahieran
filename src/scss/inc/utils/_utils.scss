@@ -1,0 +1,16 @@
+.u-show {
+  display: block;
+  transition: opacity .5s;
+}
+
+.u-hide {
+  display: none;
+  opacity: 0;
+}
+
+.error {
+  background: #ffffe1;
+  padding: 2em 1em;
+  font-size: 1em;
+  font-weight: bold;
+}

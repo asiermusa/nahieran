@@ -1,0 +1,33 @@
+.episode {
+	
+	&__title {
+		font-size: 1.2em;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+
+	&__desc {
+		font-size: .9em;
+		color: #999999;
+	}
+	
+	&__video {
+		padding: 2em 1em;
+	}
+	
+	&__nav {
+		border-top: 1px solid rgba(#000000,.1);
+		border-bottom: 1px solid rgba(#000000,.1);
+		
+		a {
+			display: block;
+			padding: 1em;
+			font-size: .9em;
+			transition: all .3s;
+			
+			&:hover {
+				color: $secondary;
+			}
+		}
+	}
+}

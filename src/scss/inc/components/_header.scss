@@ -1,0 +1,40 @@
+.main-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	width: 100vw;
+	background: #ffffff;
+	box-shadow: 0 0 20px rgba(#000,.15);
+	padding: 1em;
+	z-index: 10;
+	
+	&__cols {
+		width: 50%;
+		display: flex;
+		align-items: center;
+		
+		&.right {
+			justify-content: flex-end;
+		}
+	}
+	
+	&__logo {
+		max-height: 30px;
+		cursor: pointer;
+		transition: .15s;
+		
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+	
+	&__slogan {
+		color: $primary;
+		font-weight: bold;
+		font-style: italic;
+		font-size: 1.2em;
+		margin-left: 10px;
+		align-items: center;
+	}
+}

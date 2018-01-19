@@ -1,0 +1,86 @@
+html, body {
+    font-family: $font;
+    font-size: 14px;
+    
+    @include from(sm){
+	  font-size: 15px;  
+    }
+}
+
+body {
+	overflow-x: hidden;
+}
+
+a {
+	color: $primary;
+}
+
+// flex container https://codepen.io/dgca/pen/QExbKN
+
+.container {
+	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 0 1em;
+
+	@include from(xs){
+		max-width: map-get($breakpoints, 'xs');
+	}
+
+	@include from(sm){
+		max-width: map-get($breakpoints, 'sm');
+	}
+	
+	@include from(md){
+		max-width: map-get($breakpoints, 'md');
+	}
+	
+	@include from(lg){
+		max-width: map-get($breakpoints, 'lg');
+	}
+}
+
+// flex row
+.row {
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 1em;
+}
+
+// flex elements
+@for $i from 1 through 12 {
+	
+	.col-xs-#{$i},
+	.col-sm-#{$i},
+	.col-md-#{$i},
+	.col-lg-#{$i} {
+		box-sizing: border-box;
+		padding: 1em;
+		width: 100%;
+	}
+	
+	.col-xs-#{$i} {
+		@include from(xs){
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+	
+	.col-sm-#{$i} {
+		@include from(sm){
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+	
+	.col-md-#{$i} {
+		@include from(md){
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+	
+	.col-lg-#{$i} {
+		@include from(lg){
+			width: calc(100% * (#{$i} / 12));
+		}
+	}
+	
+}

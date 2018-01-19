@@ -1,0 +1,159 @@
+@keyframes logo-move {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+  50% {
+   transform: scale(.9);
+   opacity: 0;
+  }
+
+  100% {
+   transform: scale(1);
+   opacity: 1;
+  }
+}
+
+@keyframes status {
+  0% { 
+	  transform: translateX(0)
+  }
+  40% { 
+	  transform: translateX(0)
+  }
+  45% { 
+	  transform: translateX(0)
+  }
+  50% { 
+	 transform: translateX(-10px)
+  }
+  55% { 
+	 transform: translateX(10px)
+  }
+  60% { 
+	 transform: translateX(-10px)
+  }
+  65% { 
+	 transform: translateX(10px)
+  }
+  70% { 
+	 transform: translateX(-10px)
+  }
+  75% { 
+	 transform: translateX(0)
+  }
+  80% { 
+	 transform: translateX(0)
+  }
+  100% { 
+	 transform: translateX(0)
+  }
+}
+
+.main-footer {
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	font-size: .9em;
+	
+	&__row {
+		display: flex;
+		flex-direction: column;
+		background: linear-gradient(90deg, $primary, $secondary);
+		color: #ffffff;
+		
+		@include from(xs) {
+			flex-direction: row;
+		}
+	}
+	
+	&__col-logo {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		padding: .7em;
+		
+		@include from(xs) {
+			width: 75%;
+		}
+	}
+	
+	&__col-btn {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: $primary;
+		padding: .7em;
+		cursor: pointer;
+		transition: all .3s;
+		
+		@include from(xs) {
+			width: 25%;
+		}
+		
+		&:hover {
+			background: #222222;
+		}
+		
+		&:focus {
+			background: $primary;
+		}
+	}
+
+	&__logo {
+		max-height: 30px;
+		fill: red;
+		animation: logo-move 3s infinite;
+
+	}	
+	
+	&__text {
+		margin-left: 10px;
+		opacity: 0;
+		transition: all .5s;
+		
+		&.is-cache {
+			opacity: 1;
+		}
+	}
+	
+	&__reload {
+		height: 20px;
+	}
+	
+	.saved-date {
+		display: block;
+		font-weight: bold;
+	}
+	
+	&__status{
+		display: block;
+		width: 100%;
+		background: #f6f6f6;
+		color: #222222;
+		padding: 1em;
+		text-align: center;
+		font-weight: bold;
+		font-size: 1em;
+		opacity: 0;
+		transition: all .3s;
+		
+		&.offline {
+			opacity: 1;
+			
+			.text {
+				animation: status 2s infinite;
+			}
+		}
+	}
+	
+	&__powered-by {
+		width: 100%;
+		background: linear-gradient(90deg, #ffffff, #e5e5e5);
+		color: #333333;
+		padding: .9em 1em;
+		font-size: .9em;
+		text-align: left;
+	}
+}

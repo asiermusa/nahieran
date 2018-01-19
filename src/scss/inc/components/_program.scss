@@ -1,0 +1,70 @@
+.program {
+	
+	&__header {
+		background: linear-gradient(90deg, $primary, $secondary);
+		color: #ffffff;
+	}
+	
+	&__title {
+		font-size: 1.1em;
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+
+	&__desc {
+		font-size: .9em;
+	}
+	
+	&__list {
+		list-style: none;
+		
+		li {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 1em;
+			border-bottom: 1px solid rgba(#000000,.1);
+			color: #222222;
+			cursor: pointer;
+			transition: all .3s;
+			
+			@include from(xs) {
+				flex-direction: row;
+			}
+						
+			&:hover {
+				background: rgba(#000000,.03);
+			}
+		}
+	}
+	
+	&__image {
+		width: 100%;
+		
+		@include from(xs) {
+			width: 30%;
+		}
+	}
+	
+	&__img {
+		max-width: 100%;
+		border-radius: 5px;
+	}
+	
+	&__content {
+		width: 100%;
+		padding: 1em 0;
+		
+		@include from(xs) {
+			width: 70%;
+			padding: 1em;
+		}
+	}
+	
+	&__date {
+		color: $primary;
+		font-size: 1em;
+		font-weight: bold;
+		margin-top: 5px;
+	}
+}
