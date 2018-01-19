@@ -2,8 +2,6 @@
 
 Eitbko saioak mugikorrean ikusteko Aplikazio Web Progresiboa.
 
-[Aplikazioa ikusi](https://asiermusa.github.io/nahieran/)
-
 HTML+CSS+JS bidez garatua.
 
 --
