@@ -47,7 +47,7 @@ export const selectProgram = () => {
               tpl += `
                 <li class="custom-episode" data-episode="${json["@id"]}">
       					  <div class="program__image">
-                    <img src="${json.episode_image}" class="program__img custom-episode" data-episode="${json["@id"]}">
+                    <img src="${json.episode_image.slice(5)}" class="program__img custom-episode" data-episode="${json["@id"]}">
                   </div>
   				
                   <div class="program__content custom-episode" data-episode="${json["@id"]}">

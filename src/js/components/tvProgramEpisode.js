@@ -61,8 +61,8 @@ export const selectEpisode = () => {
 
             tpl = `
               <div class="episode__video">
-                <video id="video" autoplay width="100%" height="100%" controls poster="${json.thumbnails[0].url}">
-                  <source src="${urlEnd}" type="video/mp4">
+                <video id="video" autoplay width="100%" height="100%" controls poster="${json.thumbnails[0].url.slice(5)}">
+                  <source src="${urlEnd.slice(5)}" type="video/mp4">
                   Zure nabigaztaileak ezin du bideorik erakutsi :(
                 </video>
               </div>
