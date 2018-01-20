@@ -12,9 +12,10 @@ export const categoriesSingle = () => {
       clearInterval(readyState)
       
       //Kategoria zerrenda ekarri
-  	  function fetchCategory(data, requestFromBGSync, catName) {
+  	  function fetchCategory(jsonData, requestFromBGSync, catName) {
 		  	
-		  	let tpl = ''
+		  	let data = jsonData.slice(5),
+		  	  tpl = ''
               
         d.querySelector('.off-canvas-menu').classList.remove('is-open')
         d.querySelector('.nav-icon').classList.remove('is-active')

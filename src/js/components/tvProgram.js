@@ -12,9 +12,10 @@ export const selectProgram = () => {
       clearInterval(ajaxLoading)
       
       //Programa ekarri (zerrenda)
-      function fetchProgram(data, requestFromBGSync) {
+      function fetchProgram(jsonData, requestFromBGSync) {
 	 		
-        let tpl = '',
+        let data = jsonData.slice(5),
+          tpl = '',
           date = ''
         
         //Beharrezko sekzioak ezkutatu
@@ -25,7 +26,7 @@ export const selectProgram = () => {
         //Loader erakutsi
         d.querySelector('.loader-program').classList.add('loader-show')
         d.querySelector('.loader-template-program').classList.add('loader-show')
-             
+        
         fetch(data)
           .then( response => response.json() )
           .then(json => {
@@ -65,7 +66,8 @@ export const selectProgram = () => {
           })
           .catch(err => console.log(err))
 		  }
-
+      
+      //Programa ekarri (click ebentua)
       d.getElementById("app").addEventListener('click', (e) => {
 
         e.preventDefault()

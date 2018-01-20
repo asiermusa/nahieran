@@ -21,9 +21,11 @@ export const selectEpisode = () => {
       })
       
       //episode kargatu
-      function fetchEpisode(data, requestFromBGSync) {
+      function fetchEpisode(jsonData, requestFromBGSync) {
 
-        let tpl = ''
+        let data = jsonData.slice(5),
+          tpl = ''
+          
         //Loader erakutsi
         d.querySelector('.loader-episode').classList.add('loader-show')
         d.querySelector('.loader-template-episode').classList.add('loader-show')
