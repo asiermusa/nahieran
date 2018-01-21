@@ -32,30 +32,67 @@ export const categories = () => {
         }
       })
 
-      //Beharrezko sekzioak ezkutatu
-      d.querySelectorAll('.section').forEach( section => {
-        section.classList.add('u-hide')
-      })
-      d.querySelector('.categories').classList.remove('u-hide')
-      d.querySelector('.tv').classList.remove('u-hide')
-
-      fetch('//still-castle-99749.herokuapp.com/program-type-list')
-        .then( response => response.json() )
-        .then(json => {
-
-          json.member.forEach(jsonCat => {
-            tpl += `
-            <li>
-              <a href="#" class="category-id" data-category="${jsonCat["@id"]}">
-              	${jsonCat.title}
-              </a>
-            </li>
-            `
-          })
-
-          d.querySelector('.categories__list').innerHTML = tpl
+      //Kategoriak ekarri
+      function fetchAllCategories(data, requestFromBGSync) {
+        //Beharrezko sekzioak ezkutatu
+        d.querySelectorAll('.section').forEach( section => {
+          section.classList.add('u-hide')
         })
-        .catch(err => console.log(err))
+        d.querySelector('.categories').classList.remove('u-hide')
+        d.querySelector('.tv').classList.remove('u-hide')
+
+        fetch(data)
+          .then( response => response.json() )
+          .then(json => {
+
+            if ( !requestFromBGSync ) {
+              localStorage.removeItem('category-list')
+            }
+
+            localStorage.setItem('localJsonCategories', JSON.stringify(json));
+
+            json.member.forEach(jsonCat => {
+              tpl += `
+              <li>
+                <a href="#" class="category-id" data-category="${jsonCat["@id"]}">
+                	${jsonCat.title}
+                </a>
+              </li>
+              `
+            })
+
+            d.querySelector('.categories__list').innerHTML = tpl
+          })
+          .catch(err =>
+            localStorage.setItem('category-list', data)
+          )
+      }
+
+      //Aplikaziora sartzen denean egin beharrekoa
+      let data = '//still-castle-99749.herokuapp.com/program-type-list'
+
+      localStorage.setItem('category-list', data)
+
+      fetchAllCategories(data, false)
+
+      //Background Sync (programak)
+      if ( 'serviceWorker' in n && 'SyncManager' in w ) {
+        function registerBGSync () {
+          n.serviceWorker.ready
+          .then(registration => {
+            return registration.sync.register('nahieran-tv-categories')
+              .then( () => c('Atzeko sinkronizazioa erregistratua') )
+              .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
+          })
+        }
+        registerBGSync()
+      }
+      //Background Sync (programak)
+      n.serviceWorker.addEventListener('message', e => {
+        c('Atzeko sinkronizazioa message bidez: ', e.data)
+        if( e.data === 'online nahieran-tv-categories' )
+          fetchAllCategories( localStorage.getItem('category-list'), true)
+      })
 
     } //readyState
 

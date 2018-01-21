@@ -52,7 +52,8 @@ self.addEventListener('sync', function (e) {
   console.log('Atzeko sinkronizazioa aktibatua', e);
 
   //Revisamos que la etiqueta de sincronización sea la que definimos o la que emulan las devtools
-  if (e.tag === 'nahieran-tv' || e.tag === 'nahieran-tv-program' || e.tag === 'nahieran-tv-program-episode' || e.tag === 'nahieran-category' || e.tag === 'test-tag-from-devtools') {
+  if (e.tag === 'nahieran-tv' || e.tag === 'nahieran-tv-program' || e.tag === 'nahieran-tv-program-episode' || e.tag === 'nahieran-tv-categories' || e.tag === 'nahieran-category' || e.tag === 'test-tag-from-devtools') {
+
     e.waitUntil(
     //Comprobamos todas las pestañas abiertas y les enviamos postMessage
     self.clients.matchAll().then(function (all) {

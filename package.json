@@ -1,9 +1,8 @@
 {
-  "name": "ipes",
+  "name": "nahieran",
   "version": "1.0.0",
   "description": "",
-  "main": "./index.html",
-  "dependencies": {},
+  "main": "./bundle.js",
   "devDependencies": {
     "autoprefixer": "^7.2.4",
     "b": "^2.0.1",
@@ -30,7 +29,6 @@
     "gulp-sourcemaps": "^2.6.1",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
-    "jquery": "3.2.1",
     "vinyl-source-stream": "^2.0.0"
   },
   "scripts": {

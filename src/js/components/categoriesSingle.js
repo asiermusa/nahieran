@@ -10,13 +10,13 @@ export const categoriesSingle = () => {
     if ( d.readyState  === 'complete' ) {
 
       clearInterval(readyState)
-      
+
       //Kategoria zerrenda ekarri
   	  function fetchCategory(jsonData, requestFromBGSync, catName) {
-		  	
+
 		  	let data = jsonData.slice(5),
 		  	  tpl = ''
-              
+
         d.querySelector('.off-canvas-menu').classList.remove('is-open')
         d.querySelector('.nav-icon').classList.remove('is-active')
         //Loader erakutsi
@@ -26,7 +26,7 @@ export const categoriesSingle = () => {
         d.querySelectorAll('.section').forEach( section => {
           section.classList.add('u-hide')
         })
-        
+
         fetch(data)
           .then( response => response.json() )
           .then(json => {
@@ -34,13 +34,13 @@ export const categoriesSingle = () => {
             if ( !requestFromBGSync ) {
               localStorage.removeItem('category')
       			}
-      		
+
             //Loader ezkutatu
             d.querySelector('.loader-cat').classList.remove('loader-show')
-            d.querySelector('.loader-template-cat').classList.remove('loader-show')  
-            
+            d.querySelector('.loader-template-cat').classList.remove('loader-show')
+
             d.querySelector('.single-cat').classList.remove('u-hide')
-  		  
+
         		json.member.forEach(jsonCat => {
               tpl += `
                 <li>
@@ -50,7 +50,7 @@ export const categoriesSingle = () => {
                   </li>
                   `
             })
-  
+
             d.querySelector('.single-cat__list').innerHTML = tpl
             d.querySelector('.single-cat__header').innerHTML = `
               <div class="tv__title">${catName}</div>
@@ -58,23 +58,24 @@ export const categoriesSingle = () => {
               `
           })
           .catch(err => console.log(err))
-          
+
       } //fetchCategory
 
       d.querySelector('.categories__list').addEventListener('click', (e) => {
 
         e.preventDefault()
-        if( d.getElementById("video")) 
+        if( d.getElementById("video"))
           d.getElementById("video").pause()
-		  
+
         if( e.target.classList.contains('category-id') ) {
-	  
-          let data = e.target.getAttribute('data-category'),
-            catName = e.target.innerHTML
-          
+          var catName = e.target.innerHTML
+          let data = e.target.getAttribute('data-category')
+
           localStorage.setItem('category', data)
-          fetchCategory( data, false, catName)  
-          
+          localStorage.setItem('category-name', catName)
+
+          fetchCategory(data, false, catName)
+
           //Background Sync (kategoria)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
             function registerBGSync () {
@@ -86,14 +87,14 @@ export const categoriesSingle = () => {
               })
             }
             registerBGSync()
-          }        
+          }
         }
       })
       //Background Sync (kategoria)
       n.serviceWorker.addEventListener('message', e => {
 		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
 		    if( e.data === 'online nahieran-category')
-		    	fetchCategory( localStorage.getItem('category'), true )
+		    	fetchCategory(localStorage.getItem('category'), true, localStorage.getItem('category-name'))
 		  })
 
     } //readyState

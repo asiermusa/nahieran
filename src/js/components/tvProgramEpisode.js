@@ -9,7 +9,7 @@ export const selectEpisode = () => {
 
     if ( d.readyState  === 'complete' ) {
       clearInterval(readyState)
-      
+
       //Atzera joan (programetara)
       d.getElementById('episode__back').addEventListener('click', (e) => {
         //Beharrezko sekzioak ezkutatu
@@ -19,25 +19,25 @@ export const selectEpisode = () => {
         })
         d.querySelector('.program').classList.remove('u-hide')
       })
-      
+
       //episode kargatu
       function fetchEpisode(jsonData, requestFromBGSync) {
 
         let data = jsonData.slice(5),
           tpl = ''
-          
+
         //Loader erakutsi
         d.querySelector('.loader-episode').classList.add('loader-show')
         d.querySelector('.loader-template-episode').classList.add('loader-show')
-        
+
         //Beharrezko sekzioak ezkutatu
         d.querySelectorAll('.section').forEach( section => {
           section.classList.add('u-hide')
         })
-        
+
         //APIa deitu (episode)
         fetch(data)
-        
+
           .then(response => response.json())
           .then(json => {
 
@@ -46,7 +46,7 @@ export const selectEpisode = () => {
             if (!requestFromBGSync) {
               localStorage.removeItem('tv-program-episode')
             }
-            
+
             //Loader ezkutatu
             d.querySelector('.loader-episode').classList.remove('loader-show')
             d.querySelector('.loader-template-episode').classList.remove('loader-show')
@@ -78,7 +78,7 @@ export const selectEpisode = () => {
             d.querySelector('.episode__play').innerHTML = '<div class="error">Konexioak huts egin du</div>'
           })
       } //fetchEpisode
-      
+
       //Programa zerrendatik episode ekarri (click)
       d.querySelector('.program__list').addEventListener('click', (e) => {
         e.preventDefault()
@@ -89,7 +89,7 @@ export const selectEpisode = () => {
 
           localStorage.setItem('tv-program-episode', data)
           fetchEpisode(data, false)
-          
+
           //Background Sync (episode)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
             function registerBGSync () {
@@ -110,7 +110,7 @@ export const selectEpisode = () => {
         if( e.data === 'online nahieran-tv-program-episode')
           fetchEpisode(localStorage.getItem('tv-program-episode'), true)
       })
-      
+
     } //readyState
   }, 100 )//interval
 
@@ -118,7 +118,7 @@ export const selectEpisode = () => {
     <div class="loader-template loader-template-episode">
       <div class="loader loader-episode"></div>
     </div>
-    
+
     <div class="episode section u-hide">
       <header class="section-header episode__header"></header>
       <div class="episode__play"></div>

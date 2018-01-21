@@ -7,11 +7,15 @@
 	<meta charset="UTF-8">
 	<title>Nahieran</title>
 	<link rel="stylesheet" href="./styles.min.css?v=1.0">
-	
+	<link rel="stylesheet" href="https://cdn.plyr.io/2.0.18/plyr.css">
+
+	<script src="https://cdn.plyr.io/2.0.18/plyr.js"></script>
+	<script>plyr.setup(document.querySelector('.js-player'), options)</script>
+
 	<!-- Declaración de manifest -->
 	<link rel="manifest" href="./manifest.json">
 	<meta name="theme-color" content="#ffffff">
-	
+
 	<!-- Detección de Icono de PWA -->
 	<link rel="icon" type="image/png" sizes="16x16" href="./assets/icon_16x16.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="./assets/icon_32x32.png">
@@ -23,18 +27,18 @@
 	<link rel="icon" type="image/png" sizes="384x384" href="./assets/icon_384x384.png">
 	<link rel="icon" type="image/png" sizes="512x512" href="./assets/icon_512x512.png">
 	<link rel="icon" type="image/png" sizes="1024x1024" href="./assets/icon_1024x1024.png">
-	
+
 	<!-- Metatags iOS -->
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="apple-mobile-web-app-title" content="eitb nahieran">
 	<link rel="apple-touch-icon" sizes="192x192" href="./assets/icon_192x192.png">
-	
+
 	<!-- Metatags Windows -->
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="./assets/icon_192x192.png">
-	
+
 	<!-- Otros Metatags -->
 	<meta property="og:title" content="eitb nahieran">
 	<meta property="og:locale" content="eu">
@@ -45,7 +49,11 @@
 
 </head>
 <body>
+
 	<div id="app" class="app"></div>
+
 	<script src="./bundle.js"></script>
+	<script src="./afterglow.min.js"></script>
+
 </body>
 </html>

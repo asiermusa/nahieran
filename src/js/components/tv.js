@@ -140,8 +140,9 @@ export const tv = () => {
           localStorage.removeItem('localJson')
           localStorage.removeItem('jsonDate')
 
-          //Bideo martxan badago ere, geratu
-          d.getElementById("video").pause()
+          //Bideoa martxan badago ere, geratu
+          if(d.getElementById("video").pause())
+            d.getElementById("video").pause()
 
           let reset = true,
             data= '//still-castle-99749.herokuapp.com/playlist'
@@ -182,8 +183,8 @@ export const tv = () => {
             n.serviceWorker.ready
             .then(registration => {
               return registration.sync.register('nahieran-tv')
-                .then( () => c('Sincronizaci�n de Fondo Registrada') )
-                .catch( err => c('Fallo la Sincronizaci�n de Fondo', err) )
+              .then( () => c('Atzeko sinkronizazioa erregistratua') )
+              .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
             })
           }
           registerBGSync()
