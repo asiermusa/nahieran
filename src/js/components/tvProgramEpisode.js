@@ -74,7 +74,7 @@ export const selectEpisode = () => {
               `
           })
           .catch(err => {
-            localStorage.setItem('tv-program-episode', data)
+            localStorage.setItem('tv-program-episode', jsonData)
             d.querySelector('.episode__play').innerHTML = '<div class="error">Konexioak huts egin du</div>'
           })
       } //fetchEpisode
