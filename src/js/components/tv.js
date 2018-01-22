@@ -1,4 +1,5 @@
-import {categories} from './categories';
+import DPlayer from 'DPlayer'
+import {categories} from './categories'
 import {selectProgram} from './tvProgram'
 import {selectEpisode} from './tvProgramEpisode'
 import {categoriesSingle} from './categoriesSingle'

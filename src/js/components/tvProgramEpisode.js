@@ -1,3 +1,5 @@
+import DPlayer from 'DPlayer'
+
 const c = console.log,
   d = document,
   n = navigator,
@@ -58,16 +60,19 @@ export const selectEpisode = () => {
             }else{
               urlEnd = json.formats[7].url
             }
-
-            tpl = `
-              <div class="episode__video">
-                <video id="video" autoplay width="100%" height="100%" controls poster="${json.thumbnails[0].url.slice(5)}">
-                  <source src="${urlEnd.slice(5)}" type="video/mp4">
-                  Zure nabigaztaileak ezin du bideorik erakutsi :(
-                </video>
-              </div>
-              `
-            d.querySelector('.episode__play').innerHTML = tpl
+            
+            if(d.getElementById('dplayer')){
+              var dp = new DPlayer({
+                container: d.getElementById('dplayer'),
+                autoplay: false,
+                theme: '#008cd0',
+                screenshot: true,
+                video: {
+                  url: urlEnd.slice(5)                
+                }
+              });
+            }
+                        
             d.querySelector('.episode__header').innerHTML = `
               <div class="episode__title">${json.title}</div>
               <div class="episode__desc">${json.description}</div>
@@ -121,7 +126,9 @@ export const selectEpisode = () => {
 
     <div class="episode section u-hide">
       <header class="section-header episode__header"></header>
-      <div class="episode__play"></div>
+      <div class="episode__play">
+        <div id="dplayer"></div>
+      </div>
       <div class="episode__nav"><a href="#" id="episode__back">< Atzera</a></div>
     </div>
     `

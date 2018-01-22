@@ -35,5 +35,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "@asiermusa",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dplayer": "^1.21.0"
+  }
 }
