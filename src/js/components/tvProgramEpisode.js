@@ -30,8 +30,7 @@ export const selectEpisode = () => {
       //episode kargatu
       function fetchEpisode(jsonData, requestFromBGSync) {
 
-        let data = jsonData.slice(5),
-          tpl = ''
+        let data = jsonData.slice(5)
 
         //Loader erakutsi
         d.querySelector('.loader-episode').classList.add('loader-show')
@@ -44,10 +43,12 @@ export const selectEpisode = () => {
         
         //APIa deitu (episode)
         fetch(data)
-
+        
           .then(response => response.json())
           .then(json => {
-
+            
+            var dp = ""
+            
             d.querySelector('.episode').classList.remove('u-hide')
 
             if (!requestFromBGSync) {
@@ -67,7 +68,7 @@ export const selectEpisode = () => {
             }
             
             if(d.getElementById('dplayer')){
-              var dp = new DPlayer({
+              dp = new DPlayer({
                 container: d.getElementById('dplayer'),
                 autoplay: false,
                 theme: '#008cd0',
@@ -76,7 +77,12 @@ export const selectEpisode = () => {
                 }
               });
             }
-                        
+             
+            //Bideoaren src kodea aldatu (https bidez funtzionatzeko)           
+            d.querySelector(".dplayer-video").setAttribute("src", urlEnd.slice(5))
+            
+            d.querySelector('.episode__error').classList.remove('show')
+                       
             d.querySelector('.episode__header').innerHTML = `
               <div class="episode__title">${json.title}</div>
               <div class="episode__desc">${json.description}</div>
@@ -85,7 +91,8 @@ export const selectEpisode = () => {
           })
           .catch(err => {
             localStorage.setItem('tv-program-episode', jsonData)
-            d.querySelector('.episode__play').innerHTML = '<div class="error">Konexioak huts egin du</div>'
+            d.querySelector('.episode__error').innerHTML = 'Konexioak huts egin du'
+            d.querySelector('.episode__error').classList.add('show')
           })
       } //fetchEpisode
 
@@ -100,9 +107,26 @@ export const selectEpisode = () => {
           localStorage.setItem('tv-program-episode', data)
           fetchEpisode(data, false)
 
+          //Background Sync (episode)
+          if ( 'serviceWorker' in n && 'SyncManager' in w ) {
+            function registerBGSync () {
+              n.serviceWorker.ready
+              .then(registration => {
+                return registration.sync.register('nahieran-tv-program-episode')
+                  .then( () => c('Atzeko sinkronizazioa erregistratua') )
+                  .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
+              })
+            }
+            registerBGSync()
+          }
         }
       })
-
+      //Background Sync (episode)
+      n.serviceWorker.addEventListener('message', e => {
+        c('Atzeko sinkronizazioa message bidez: ', e.data)
+        if( e.data === 'online nahieran-tv-program-episode' || e.data === 'online test-tag-from-devtools' )
+          fetchEpisode(localStorage.getItem('tv-program-episode'), true)
+      })
 
     } //readyState
   }, 100 )//interval
@@ -117,6 +141,7 @@ export const selectEpisode = () => {
       <div class="episode__play">
         <div id="dplayer"></div>
       </div>
+      <div class="episode__error"></div>
       <div class="episode__nav"><a href="#" id="episode__back">< Atzera</a></div>
     </div>
     `

@@ -15,6 +15,19 @@
 		padding: 2em 1em;
 	}
 	
+	&__error {
+    background: #ffffe1;
+    padding: 2em 1em;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 1em;
+    display: none;
+        
+    &.show {
+      display: block;
+    }
+  }
+	
 	&__nav {
 		border-top: 1px solid rgba(#000000,.1);
 		border-bottom: 1px solid rgba(#000000,.1);
