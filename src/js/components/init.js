@@ -7,12 +7,13 @@ const c = console.log,
 
 export const pwa = () => {
   //Service Workerra erregistratu
-  if ( 'serviceWorker' in n ) {
+  if ( 'serviceWorker' in n && n.userAgent.indexOf("Firefox") === -1 ) { //Exkluitu firefox SW erregistrotik
     n.serviceWorker.register('./sw.js')
+
     .then( registration => {
       c('Service Worker erregistratua', registration.scope)
     })
-    .catch( err => c(`Registro de Service Worker fallido`, err) )
+    .catch( err => c('Registro de Service Worker fallido', err) )
   }
 }
 

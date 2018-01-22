@@ -72,13 +72,14 @@ export const selectEpisode = () => {
                 container: d.getElementById('dplayer'),
                 autoplay: false,
                 theme: '#008cd0',
+                preload: 'metadata',
                 video: {
                   url: urlEnd               
                 }
               });
             }
              
-            //Bideoaren src kodea aldatu (https bidez funtzionatzeko)           
+            //Bideoaren src kodea aldatu (https bidez funtzionatzeko)
             d.querySelector(".dplayer-video").setAttribute("src", urlEnd.slice(5))
             
             d.querySelector('.episode__error').classList.remove('show')
