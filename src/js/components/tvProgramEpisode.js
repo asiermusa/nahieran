@@ -100,26 +100,9 @@ export const selectEpisode = () => {
           localStorage.setItem('tv-program-episode', data)
           fetchEpisode(data, false)
 
-          //Background Sync (episode)
-          if ( 'serviceWorker' in n && 'SyncManager' in w ) {
-            function registerBGSync () {
-              n.serviceWorker.ready
-              .then(registration => {
-                return registration.sync.register('nahieran-tv-program-episode')
-                  .then( () => c('Atzeko sinkronizazioa erregistratua') )
-                  .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
-              })
-            }
-            registerBGSync()
-          }
         }
       })
-      //Background Sync (episode)
-      n.serviceWorker.addEventListener('message', e => {
-        c('Atzeko sinkronizazioa message bidez: ', e.data)
-        if( e.data === 'online nahieran-tv-program-episode')
-          fetchEpisode(localStorage.getItem('tv-program-episode'), true)
-      })
+
 
     } //readyState
   }, 100 )//interval
