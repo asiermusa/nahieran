@@ -1,7 +1,7 @@
 'use strict';
 
 var CACHE_NAME = 'nahieran-cache',
-    urlsToCache = ['./', './?utm=homescreen', './index.html', './index.html?utm=homescreen', './styles.min.css', './bundle.js', './assets/favicon.png', 'https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i,800,800i'];
+    urlsToCache = ['./', './?utm=homescreen', './index.html', './index.html?utm=homescreen', './styles.min.css', './bundle.js', './assets/icon_192x192.png', 'https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i,800,800i'];
 
 self.addEventListener('install', function (e) {
   console.log('SW instalatua');

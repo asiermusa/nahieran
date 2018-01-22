@@ -70,7 +70,7 @@ export const categories = () => {
 
       //Aplikaziora sartzen denean egin beharrekoa
       let data = '//still-castle-99749.herokuapp.com/program-type-list'
-
+        
       localStorage.setItem('category-list', data)
 
       fetchAllCategories(data, false)

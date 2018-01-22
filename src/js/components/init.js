@@ -37,17 +37,17 @@ export const isOnline = () => {
   w.addEventListener('offline', networkStatus)
 }
 
-export const init = (data) => {
+export const init = () => {
   
-  const reloadApp = setInterval(() => {
+  const readyState = setInterval(() => {
     //Aplikazioa/leihoa eguneratu
     if ( d.readyState  === 'complete' ) {
-      clearInterval(reloadApp)
+      clearInterval(readyState)
       d.getElementById("reload-app").addEventListener('click', (e) => {
         location.reload()
       })
     }
-  })
+  }, 100 )
 
   return `
   <header class="main-header">

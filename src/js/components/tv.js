@@ -1,4 +1,3 @@
-import DPlayer from 'DPlayer'
 import {categories} from './categories'
 import {selectProgram} from './tvProgram'
 import {selectEpisode} from './tvProgramEpisode'
@@ -84,6 +83,11 @@ export const tv = () => {
         })
         d.querySelector('.categories').classList.remove('u-hide')
         d.querySelector('.tv').classList.remove('u-hide')
+        
+        //Bideoa martxan badago ere, geratu
+        if(d.querySelector(".dplayer-video")) {
+          d.querySelector(".dplayer-video").pause()
+        }
 
         //APIa deitu behar bada...
         if(reset) {
@@ -91,7 +95,7 @@ export const tv = () => {
           fetch(data)
             .then( response => response.json() )
             .then(json => {
-
+              
               if ( !requestFromBGSync ) {
                 localStorage.removeItem('tv')
               }
@@ -140,10 +144,6 @@ export const tv = () => {
         if ( confirm('Programa zerrenda eguneratu nahi al duzu?') == true) {
           localStorage.removeItem('localJson')
           localStorage.removeItem('jsonDate')
-
-          //Bideoa martxan badago ere, geratu
-          if(d.getElementById("video").pause())
-            d.getElementById("video").pause()
 
           let reset = true,
             data= '//still-castle-99749.herokuapp.com/playlist'

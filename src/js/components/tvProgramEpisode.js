@@ -17,9 +17,14 @@ export const selectEpisode = () => {
         //Beharrezko sekzioak ezkutatu
         d.querySelectorAll('.section').forEach( section => {
           section.classList.add('u-hide')
-          d.getElementById("video").pause()
         })
         d.querySelector('.program').classList.remove('u-hide')
+        
+        //Bideoa martxan badago ere, geratu
+        if(d.querySelector(".dplayer-video")) {
+          d.querySelector(".dplayer-video").pause()
+        }
+    
       })
 
       //episode kargatu
@@ -36,7 +41,7 @@ export const selectEpisode = () => {
         d.querySelectorAll('.section').forEach( section => {
           section.classList.add('u-hide')
         })
-
+        
         //APIa deitu (episode)
         fetch(data)
 
@@ -66,9 +71,8 @@ export const selectEpisode = () => {
                 container: d.getElementById('dplayer'),
                 autoplay: false,
                 theme: '#008cd0',
-                screenshot: true,
                 video: {
-                  url: urlEnd.slice(5)                
+                  url: urlEnd               
                 }
               });
             }
@@ -77,6 +81,7 @@ export const selectEpisode = () => {
               <div class="episode__title">${json.title}</div>
               <div class="episode__desc">${json.description}</div>
               `
+        
           })
           .catch(err => {
             localStorage.setItem('tv-program-episode', jsonData)

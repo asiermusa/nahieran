@@ -6,7 +6,7 @@ const CACHE_NAME = 'nahieran-cache',
     './index.html?utm=homescreen',
     './styles.min.css',
     './bundle.js',
-    './assets/favicon.png',
+    './assets/icon_192x192.png',
     'https://fonts.googleapis.com/css?family=Raleway:400,400i,600,600i,700,700i,800,800i'
 ]
 

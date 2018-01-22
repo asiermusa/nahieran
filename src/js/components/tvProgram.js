@@ -5,11 +5,11 @@ const c = console.log,
 
 export const selectProgram = () => {
 
-  const ajaxLoading = setInterval(() => {
+  const readyState = setInterval(() => {
 
     if ( d.readyState  === 'complete' ) {
 
-      clearInterval(ajaxLoading)
+      clearInterval(readyState)
 
       //Programa ekarri (zerrenda)
       function fetchProgram(jsonData, requestFromBGSync) {
@@ -26,6 +26,11 @@ export const selectProgram = () => {
         //Loader erakutsi
         d.querySelector('.loader-program').classList.add('loader-show')
         d.querySelector('.loader-template-program').classList.add('loader-show')
+        
+        //Bideoa martxan badago ere, geratu
+        if(d.querySelector(".dplayer-video")) {
+          d.querySelector(".dplayer-video").pause()
+        }
 
         fetch(data)
           .then( response => response.json() )

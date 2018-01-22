@@ -26,6 +26,11 @@ export const categoriesSingle = () => {
         d.querySelectorAll('.section').forEach( section => {
           section.classList.add('u-hide')
         })
+        
+        //Bideoa martxan badago ere, geratu
+        if(d.querySelector(".dplayer-video")) {
+          d.querySelector(".dplayer-video").pause()
+        }
 
         fetch(data)
           .then( response => response.json() )
@@ -64,8 +69,6 @@ export const categoriesSingle = () => {
       d.querySelector('.categories__list').addEventListener('click', (e) => {
 
         e.preventDefault()
-        if( d.getElementById("video"))
-          d.getElementById("video").pause()
 
         if( e.target.classList.contains('category-id') ) {
           var catName = e.target.innerHTML
