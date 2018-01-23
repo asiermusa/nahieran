@@ -73,6 +73,8 @@ export const categories = () => {
         
       localStorage.setItem('category-list', data)
 
+      fetchAllCategories(data, false)
+
       //Background Sync (programak)
       if ( 'serviceWorker' in n && 'SyncManager' in w ) {
         function registerBGSync () {
