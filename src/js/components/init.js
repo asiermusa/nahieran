@@ -1,4 +1,9 @@
 import {tv} from './tv';
+import {deleteContent} from './tv';
+import {categories} from './categories'
+import {selectProgram} from './tvProgram'
+import {selectEpisode} from './tvProgramEpisode'
+import {categoriesSingle} from './categoriesSingle'
 
 const c = console.log,
   d = document,
@@ -25,8 +30,8 @@ export const isOnline = () => {
 
     if ( n.onLine ) {
       metaTagTheme.setAttribute('content', '#ffffff')
-      d.querySelector(".main-footer__status").classList.remove("offline")
       d.querySelector(".offline").innerHTML = ""
+      d.querySelector(".main-footer__status").classList.remove("offline")
     } else {
       metaTagTheme.setAttribute('content', '#c9c9c9')
       d.querySelector(".main-footer__status").classList.add("offline")
@@ -45,11 +50,11 @@ export const init = () => {
     if ( d.readyState  === 'complete' ) {
       clearInterval(readyState)
       d.getElementById("reload-app").addEventListener('click', (e) => {
-        location.reload()
+        deleteContent()
       })
     }
   }, 100 )
-
+  
   return `
   <header class="main-header">
     <div class="main-header__cols">
@@ -64,9 +69,13 @@ export const init = () => {
       </div>
     </div>
   </header>
-
+  
   ${tv()}
-
+  ${categories()}
+  ${selectProgram()}
+  ${selectEpisode()}
+  ${categoriesSingle()}
+    
   <footer class="main-footer">
     <div class="main-footer__status"></div>
     <div class="main-footer__row">

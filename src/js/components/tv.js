@@ -1,12 +1,22 @@
-import {categories} from './categories'
-import {selectProgram} from './tvProgram'
-import {selectEpisode} from './tvProgramEpisode'
-import {categoriesSingle} from './categoriesSingle'
-
 const c = console.log,
   d = document,
   n = navigator,
   w = window
+
+export const deleteContent = () => {
+  
+  //Beharrezko sekzioak ezkutatu
+  d.querySelectorAll('.section').forEach( section => {
+    section.classList.add('u-hide')
+  })
+  d.querySelector('.categories').classList.remove('u-hide')
+  d.querySelector('.tv').classList.remove('u-hide')
+  
+  //Bideoa martxan badago ere, geratu
+  if(d.querySelector(".dplayer-video")) {
+    d.querySelector(".dplayer-video").pause()
+    }
+}
 
 const filtering = (ul) => {
 
@@ -71,7 +81,7 @@ export const tv = () => {
 
       //Programak ekarri
       function fetchAllPrograms(data, requestFromBGSync, reset) {
-
+        
         let tpl = ''
 
         //Loader erakutsi
@@ -172,7 +182,7 @@ export const tv = () => {
         fetchAllPrograms(localStorage.getItem('localJson'), false, false)
       }else{
         let reset = true,
-          data= '//still-castle-99749.herokuapp.com/playlist'
+          data = '//still-castle-99749.herokuapp.com/playlist'
 
         localStorage.setItem('tv', data)
 
@@ -202,7 +212,6 @@ export const tv = () => {
   }, 100 )//interval
 
   return `
-    ${categories()}
     <div class="tv section">
       <div class="tv__form">
         <input type="text" id="find-programs" class="tv__input" placeholder="eitbko saioen artean bilatu..." title="Saioak bilatu">
@@ -213,8 +222,5 @@ export const tv = () => {
         <div class="loader loader-tv"></div>
       </div>
     </div>
-    ${selectProgram()}
-    ${selectEpisode()}
-    ${categoriesSingle()}
     `
 }
