@@ -7,7 +7,7 @@ PWA honen erabilgarritasun guztiak, Chrome nabigatzaileetan soilik daude 100%ean
 **[Aplikazioa abiarazi](https://asiermusa.github.io/nahieran)**
 
 
-![image](https://i.imgur.com/3AE3dI6.jpg)
+![image](https://i.imgur.com/waF0jGrg.jpg)
 
 
 **PWA baten berezitasun handienak:**
