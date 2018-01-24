@@ -7,15 +7,15 @@ PWA honen erabilgarritasun guztiak, Chrome nabigatzaileetan soilik daude 100%ean
 **[Aplikazioa abiarazi](https://asiermusa.github.io/nahieran)**
 
 
-![image](https://i.imgur.com/waF0jGrg.jpg)
+![image](https://i.imgur.com/NneYYLh.jpg)
 
 
 **PWA baten berezitasun handienak:**
 
 - Webgunera lehen aldiz sartzean, mugikorrean app honetara lotura pertsonalizatu bat jartzeko aukera (ikono bidez).
-- **Servive Worker** bidez,konexiorik gabe eta cachean gordetako informazio bidez webgunea ikusteko aukera.
+- **Servive Worker** bidez, internet konexiorik gabe eta cachean gordetako informazioarekin webgunea ikusteko aukera.
 - Atzeko sinkronizazio bidez konexio mugatuko tokietan informazioa bidali eta jasotzeko aukera.
-- Push notifikazio bidez erabiltzailearekin interaktuatzeko aukera.
+- Push notifikazioekin erabiltzailearekin interaktuatzeko aukera.
 
 ## Instalatzeko
 
