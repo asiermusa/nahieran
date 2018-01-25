@@ -186,27 +186,34 @@ export const tv = () => {
 
         localStorage.setItem('tv', data)
 
-        fetchAllPrograms(data, false, reset)
-
         //Background Sync (programak)
         if ( 'serviceWorker' in n && 'SyncManager' in w ) {
           function registerBGSync () {
             n.serviceWorker.ready
             .then(registration => {
               return registration.sync.register('nahieran-tv')
-              .then( () => c('Atzeko sinkronizazioa erregistratua') )
+              .then( () => {
+                c('Atzeko sinkronizazioa erregistratua')
+                //Loader erakutsi
+                d.querySelector('.loader-tv').classList.add('loader-show')
+                d.querySelector('.loader-template-tv').classList.add('loader-show')
+              })
               .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
             })
           }
           registerBGSync()
+          
+          //Background Sync (programak)
+          n.serviceWorker.addEventListener('message', e => {
+            c('Atzeko sinkronizazioa message bidez: ', e.data)
+            if( e.data === 'online nahieran-tv' )
+              fetchAllPrograms( localStorage.getItem('tv'), true, reset )
+          })
+        }else{
+          fetchAllPrograms(data, false, reset)
         }
       }
-      //Background Sync (programak)
-      n.serviceWorker.addEventListener('message', e => {
-        c('Atzeko sinkronizazioa message bidez: ', e.data)
-        if( e.data === 'online nahieran-tv' )
-          fetchAllPrograms( localStorage.getItem('tv'), true, false )
-      })
+      
 
     } //readyState
   }, 100 )//interval

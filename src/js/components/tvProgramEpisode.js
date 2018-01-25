@@ -106,7 +106,6 @@ export const selectEpisode = () => {
           let data = e.target.getAttribute('data-episode')
 
           localStorage.setItem('tv-program-episode', data)
-          fetchEpisode(data, false)
 
           //Background Sync (episode)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
@@ -114,20 +113,29 @@ export const selectEpisode = () => {
               n.serviceWorker.ready
               .then(registration => {
                 return registration.sync.register('nahieran-tv-program-episode')
-                  .then( () => c('Atzeko sinkronizazioa erregistratua') )
+                  .then( () => {
+                    c('Atzeko sinkronizazioa erregistratua')
+                    //Loader erakutsi
+                    d.querySelector('.loader-episode').classList.add('loader-show')
+                    d.querySelector('.loader-template-episode').classList.add('loader-show')
+                  })
                   .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
               })
             }
             registerBGSync()
+            
+            //Background Sync (episode)
+            n.serviceWorker.addEventListener('message', e => {
+              c('Atzeko sinkronizazioa message bidez: ', e.data)
+              if( e.data === 'online nahieran-tv-program-episode' || e.data === 'online test-tag-from-devtools' )
+                fetchEpisode(localStorage.getItem('tv-program-episode'), true)
+            })
+          }else{
+            fetchEpisode(data, false)
           }
         }
       })
-      //Background Sync (episode)
-      n.serviceWorker.addEventListener('message', e => {
-        c('Atzeko sinkronizazioa message bidez: ', e.data)
-        if( e.data === 'online nahieran-tv-program-episode' || e.data === 'online test-tag-from-devtools' )
-          fetchEpisode(localStorage.getItem('tv-program-episode'), true)
-      })
+      
 
     } //readyState
   }, 100 )//interval

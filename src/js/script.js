@@ -1,4 +1,4 @@
-import { init, pwa, isOnline, ga } from './components/init';
+import { init, pwa, isOnline } from './components/init';
 
 document.getElementById('app').innerHTML = init()
 
@@ -6,5 +6,3 @@ document.getElementById('app').innerHTML = init()
 pwa()
 //Online/ffline gauden zehaztu
 isOnline()
-//Analytics
-ga()

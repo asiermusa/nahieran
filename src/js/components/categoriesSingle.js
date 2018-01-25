@@ -77,28 +77,39 @@ export const categoriesSingle = () => {
           localStorage.setItem('category', data)
           localStorage.setItem('category-name', catName)
 
-          fetchCategory(data, false, catName)
-
           //Background Sync (kategoria)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
             function registerBGSync () {
               n.serviceWorker.ready
               .then(registration => {
                 return registration.sync.register('nahieran-category')
-                .then( () => c('Atzeko sinkronizazioa erregistratua') )
+                .then( () => {
+                  c('Atzeko sinkronizazioa erregistratua')
+                  //Loader erakutsi
+                  d.querySelector('.loader-cat').classList.add('loader-show')
+                  d.querySelector('.loader-template-cat').classList.add('loader-show')
+                  //Menu itxi
+                  d.querySelector('.nav-icon').classList.remove('is-active')
+                  d.querySelector('.off-canvas-menu').classList.remove('is-open')
+                })
                 .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
               })
             }
             registerBGSync()
+            
+            //Background Sync (kategoria)
+            n.serviceWorker.addEventListener('message', e => {
+      		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
+      		    if( e.data === 'online nahieran-category')
+      		    	fetchCategory(localStorage.getItem('category'), true, localStorage.getItem('category-name'))
+      		  })
+      		  
+          }else{
+            fetchCategory(data, false, catName)
           }
         }
       })
-      //Background Sync (kategoria)
-      n.serviceWorker.addEventListener('message', e => {
-		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
-		    if( e.data === 'online nahieran-category')
-		    	fetchCategory(localStorage.getItem('category'), true, localStorage.getItem('category-name'))
-		  })
+      
 
     } //readyState
 

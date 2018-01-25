@@ -82,28 +82,35 @@ export const selectProgram = () => {
 
   		  	localStorage.setItem('tv-program', data)
 
-          fetchProgram( data, false)
-
           //Background Sync (programak)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
   			    function registerBGSync () {
   			      n.serviceWorker.ready
   			        .then(registration => {
   			          return registration.sync.register('nahieran-tv-program')
-  			            .then( () => c('Atzeko sinkronizazioa erregistratua') )
+  			            .then( () => {
+                      c('Atzeko sinkronizazioa erregistratua')
+                      //Loader erakutsi
+                      d.querySelector('.loader-program').classList.add('loader-show')
+                      d.querySelector('.loader-template-program').classList.add('loader-show')
+                    })
                     .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
   			        })
   			    }
   			    registerBGSync()
+  			    
+  			    //Background Sync (programak)
+            n.serviceWorker.addEventListener('message', e => {
+      		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
+      		    if( e.data === 'online nahieran-tv-program' )
+      		    	fetchProgram( localStorage.getItem('tv-program'), true )
+      		  })
+  			  }else{
+    			 fetchProgram( data, false)
   			  }
         }
       })
-      //Background Sync (programak)
-      n.serviceWorker.addEventListener('message', e => {
-		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
-		    if( e.data === 'online nahieran-tv-program' )
-		    	fetchProgram( localStorage.getItem('tv-program'), true )
-		  })
+      
     } //readyState
   }, 100 )//interval
 

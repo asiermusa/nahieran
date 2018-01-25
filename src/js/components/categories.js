@@ -73,26 +73,29 @@ export const categories = () => {
         
       localStorage.setItem('category-list', data)
 
-      fetchAllCategories(data, false)
-
       //Background Sync (programak)
       if ( 'serviceWorker' in n && 'SyncManager' in w ) {
         function registerBGSync () {
           n.serviceWorker.ready
           .then(registration => {
             return registration.sync.register('nahieran-tv-categories')
-              .then( () => c('Atzeko sinkronizazioa erregistratua') )
+              .then( () => {
+                c('Atzeko sinkronizazioa erregistratua')
+              })
               .catch( err => c('Errorea atzeko sinkronizazioa erregistratzean', err) )
           })
         }
         registerBGSync()
+        
+        //Background Sync (programak)
+        n.serviceWorker.addEventListener('message', e => {
+          c('Atzeko sinkronizazioa message bidez: ', e.data)
+          if( e.data === 'online nahieran-tv-categories' )
+            fetchAllCategories( localStorage.getItem('category-list'), true)
+        })
+      }else{
+        fetchAllCategories(data, false)
       }
-      //Background Sync (programak)
-      n.serviceWorker.addEventListener('message', e => {
-        c('Atzeko sinkronizazioa message bidez: ', e.data)
-        if( e.data === 'online nahieran-tv-categories' )
-          fetchAllCategories( localStorage.getItem('category-list'), true)
-      })
 
     } //readyState
 
