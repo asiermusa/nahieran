@@ -26,7 +26,7 @@ export const categoriesSingle = () => {
         d.querySelectorAll('.section').forEach( section => {
           section.classList.add('u-hide')
         })
-        
+
         //Bideoa martxan badago ere, geratu
         if(d.querySelector(".dplayer-video")) {
           d.querySelector(".dplayer-video").pause()
@@ -96,20 +96,20 @@ export const categoriesSingle = () => {
               })
             }
             registerBGSync()
-            
+
             //Background Sync (kategoria)
             n.serviceWorker.addEventListener('message', e => {
       		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
       		    if( e.data === 'online nahieran-category')
       		    	fetchCategory(localStorage.getItem('category'), true, localStorage.getItem('category-name'))
       		  })
-      		  
+
           }else{
             fetchCategory(data, false, catName)
           }
         }
       })
-      
+
 
     } //readyState
 

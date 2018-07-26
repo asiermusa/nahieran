@@ -73,7 +73,7 @@ gulp.task('bs-reload', function() {
 /* browser-sync for localhost */
 gulp.task('browser-sync', function() {
 	browserSync.init(['docs/*.css', 'docs/bundle.js'], {
-		proxy: "localhost:8888/nahieran/docs" //Your URL
+		proxy: "localhost:80/nahieran/docs" //Your URL
 	});
 });
 

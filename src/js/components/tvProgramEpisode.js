@@ -19,18 +19,18 @@ export const selectEpisode = () => {
           section.classList.add('u-hide')
         })
         d.querySelector('.program').classList.remove('u-hide')
-        
+
         //Bideoa martxan badago ere, geratu
         if(d.querySelector(".dplayer-video")) {
           d.querySelector(".dplayer-video").pause()
         }
-    
+
       })
 
       //episode kargatu
       function fetchEpisode(jsonData, requestFromBGSync) {
 
-        let data = jsonData.slice(5)
+        let data = jsonData
 
         //Loader erakutsi
         d.querySelector('.loader-episode').classList.add('loader-show')
@@ -40,15 +40,15 @@ export const selectEpisode = () => {
         d.querySelectorAll('.section').forEach( section => {
           section.classList.add('u-hide')
         })
-        
+
         //APIa deitu (episode)
         fetch(data)
-        
+
           .then(response => response.json())
           .then(json => {
-            
+
             var dp = ""
-            
+
             d.querySelector('.episode').classList.remove('u-hide')
 
             if (!requestFromBGSync) {
@@ -66,29 +66,25 @@ export const selectEpisode = () => {
             }else{
               urlEnd = json.formats[7].url
             }
-            
+
             if(d.getElementById('dplayer')){
               dp = new DPlayer({
                 container: d.getElementById('dplayer'),
                 autoplay: false,
-                theme: '#008cd0',
-                preload: 'metadata',
-                video: {
-                  url: urlEnd               
-                }
+                theme: '#008cd0'
               });
             }
-             
+
             //Bideoaren src kodea aldatu (https bidez funtzionatzeko)
-            d.querySelector(".dplayer-video").setAttribute("src", urlEnd.slice(5))
-            
+            d.querySelector(".dplayer-video").setAttribute("src", urlEnd)
+
             d.querySelector('.episode__error').classList.remove('show')
-                       
+
             d.querySelector('.episode__header').innerHTML = `
               <div class="episode__title">${json.title}</div>
               <div class="episode__desc">${json.description}</div>
               `
-        
+
           })
           .catch(err => {
             localStorage.setItem('tv-program-episode', jsonData)
@@ -123,7 +119,7 @@ export const selectEpisode = () => {
               })
             }
             registerBGSync()
-            
+
             //Background Sync (episode)
             n.serviceWorker.addEventListener('message', e => {
               c('Atzeko sinkronizazioa message bidez: ', e.data)
@@ -135,7 +131,7 @@ export const selectEpisode = () => {
           }
         }
       })
-      
+
 
     } //readyState
   }, 100 )//interval

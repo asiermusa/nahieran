@@ -4,14 +4,14 @@ const c = console.log,
   w = window
 
 export const deleteContent = () => {
-  
+
   //Beharrezko sekzioak ezkutatu
   d.querySelectorAll('.section').forEach( section => {
     section.classList.add('u-hide')
   })
   d.querySelector('.categories').classList.remove('u-hide')
   d.querySelector('.tv').classList.remove('u-hide')
-  
+
   //Bideoa martxan badago ere, geratu
   if(d.querySelector(".dplayer-video")) {
     d.querySelector(".dplayer-video").pause()
@@ -81,7 +81,7 @@ export const tv = () => {
 
       //Programak ekarri
       function fetchAllPrograms(data, requestFromBGSync, reset) {
-        
+
         let tpl = ''
 
         //Loader erakutsi
@@ -93,7 +93,7 @@ export const tv = () => {
         })
         d.querySelector('.categories').classList.remove('u-hide')
         d.querySelector('.tv').classList.remove('u-hide')
-        
+
         //Bideoa martxan badago ere, geratu
         if(d.querySelector(".dplayer-video")) {
           d.querySelector(".dplayer-video").pause()
@@ -105,7 +105,7 @@ export const tv = () => {
           fetch(data)
             .then( response => response.json() )
             .then(json => {
-              
+
               if ( !requestFromBGSync ) {
                 localStorage.removeItem('tv')
               }
@@ -156,7 +156,7 @@ export const tv = () => {
           localStorage.removeItem('jsonDate')
 
           let reset = true,
-            data= '//still-castle-99749.herokuapp.com/playlist'
+            data= 'http://still-castle-99749.herokuapp.com/playlist'
 
           localStorage.setItem('tv', data)
 
@@ -182,7 +182,7 @@ export const tv = () => {
         fetchAllPrograms(localStorage.getItem('localJson'), false, false)
       }else{
         let reset = true,
-          data = '//still-castle-99749.herokuapp.com/playlist'
+          data = 'http://still-castle-99749.herokuapp.com/playlist'
 
         localStorage.setItem('tv', data)
 
@@ -202,7 +202,7 @@ export const tv = () => {
             })
           }
           registerBGSync()
-          
+
           //Background Sync (programak)
           n.serviceWorker.addEventListener('message', e => {
             c('Atzeko sinkronizazioa message bidez: ', e.data)
@@ -213,7 +213,7 @@ export const tv = () => {
           fetchAllPrograms(data, false, reset)
         }
       }
-      
+
 
     } //readyState
   }, 100 )//interval

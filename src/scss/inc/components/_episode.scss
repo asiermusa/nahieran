@@ -1,5 +1,4 @@
 .episode {
-	
 	&__title {
 		font-size: 1.2em;
 		font-weight: bold;
@@ -7,37 +6,37 @@
 	}
 
 	&__desc {
-		font-size: .9em;
+		font-size: 0.9em;
 		color: #999999;
 	}
-	
+
 	&__play {
 		padding: 2em 1em;
 	}
-	
+
 	&__error {
-    background: #ffffe1;
-    padding: 2em 1em;
-    font-size: 1em;
-    font-weight: bold;
-    margin-bottom: 1em;
-    display: none;
-        
-    &.show {
-      display: block;
-    }
-  }
-	
+		background: #ffffe1;
+		padding: 2em 1em;
+		font-size: 1em;
+		font-weight: bold;
+		margin-bottom: 1em;
+		display: none;
+
+		&.show {
+			display: block;
+		}
+	}
+
 	&__nav {
 		border-top: 1px solid rgba(#000000,.1);
 		border-bottom: 1px solid rgba(#000000,.1);
-		
+
 		a {
 			display: block;
 			padding: 1em;
-			font-size: .9em;
-			transition: all .3s;
-			
+			font-size: 0.9em;
+			transition: all 0.3s;
+
 			&:hover {
 				color: $secondary;
 			}

@@ -13,7 +13,7 @@ export const selectProgram = () => {
 
       //Programa ekarri (zerrenda)
       function fetchProgram(jsonData, requestFromBGSync) {
-	 		
+
         let data = jsonData.slice(5),
           tpl = '',
           date = ''
@@ -26,7 +26,7 @@ export const selectProgram = () => {
         //Loader erakutsi
         d.querySelector('.loader-program').classList.add('loader-show')
         d.querySelector('.loader-template-program').classList.add('loader-show')
-        
+
         //Bideoa martxan badago ere, geratu
         if(d.querySelector(".dplayer-video")) {
           d.querySelector(".dplayer-video").pause()
@@ -52,7 +52,7 @@ export const selectProgram = () => {
               tpl += `
                 <li class="custom-episode" data-episode="${json["@id"]}">
       					  <div class="program__image">
-                    <img src="${json.episode_image.slice(5)}" class="program__img custom-episode" data-episode="${json["@id"]}">
+                    <img src="${json.episode_image}" class="program__img custom-episode" data-episode="${json["@id"]}">
                   </div>
 
                   <div class="program__content custom-episode" data-episode="${json["@id"]}">
@@ -98,7 +98,7 @@ export const selectProgram = () => {
   			        })
   			    }
   			    registerBGSync()
-  			    
+
   			    //Background Sync (programak)
             n.serviceWorker.addEventListener('message', e => {
       		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
@@ -110,7 +110,7 @@ export const selectProgram = () => {
   			  }
         }
       })
-      
+
     } //readyState
   }, 100 )//interval
 
