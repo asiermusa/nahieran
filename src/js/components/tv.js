@@ -125,7 +125,7 @@ export const tv = () => {
               //Notifikazio bidez ohartarazi
               if( w.Notification && Notification.permission !== 'denied' ) {
                 Notification.requestPermission(status => {
-                  console.log(status)
+                  //console.log(status)
                   let n = new Notification('Nahieran', {
                     body: 'Programa zerrenda eguneratu da :)',
                     icon: './assets/favicon.png'

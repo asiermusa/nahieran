@@ -1,4 +1,4 @@
-import DPlayer from 'DPlayer'
+import DPlayer from 'dplayer';
 
 const c = console.log,
   d = document,
@@ -31,7 +31,6 @@ export const selectEpisode = () => {
       function fetchEpisode(jsonData, requestFromBGSync) {
 
         let data = jsonData
-
         //Loader erakutsi
         d.querySelector('.loader-episode').classList.add('loader-show')
         d.querySelector('.loader-template-episode').classList.add('loader-show')
@@ -64,19 +63,24 @@ export const selectEpisode = () => {
             if(urlEnd === 'mp4') {
               urlEnd = json.url
             }else{
-              urlEnd = json.formats[7].url
+              urlEnd = json.formats[6].url
             }
 
             if(d.getElementById('dplayer')){
               dp = new DPlayer({
                 container: d.getElementById('dplayer'),
                 autoplay: false,
-                theme: '#008cd0'
+                theme: '#008cd0',
+                video: {
+                    url: urlEnd,
+                    thumbnails: json.thumbnail,
+                    pic: json.thumbnail
+                },
               });
             }
 
             //Bideoaren src kodea aldatu (https bidez funtzionatzeko)
-            d.querySelector(".dplayer-video").setAttribute("src", urlEnd)
+            //d.querySelector(".dplayer-video").setAttribute("src", urlEnd)
 
             d.querySelector('.episode__error').classList.remove('show')
 
@@ -101,7 +105,8 @@ export const selectEpisode = () => {
 
           let data = e.target.getAttribute('data-episode')
 
-          localStorage.setItem('tv-program-episode', data)
+          //console.warn(data)
+          localStorage.setItem('tv-program-episode', data.slice(5))
 
           //Background Sync (episode)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {

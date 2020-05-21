@@ -11,11 +11,11 @@ const CACHE_NAME = 'nahieran-cache',
 ]
 
 self.addEventListener('install', e => {
-  console.log('SW instalatua')
+  //console.log('SW instalatua')
   e.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Artxiboak katxean')
+        //console.log('Artxiboak katxean')
         return cache.addAll(urlsToCache)
         .then( () => self.skipWaiting() )
         //skipWaiting forza al SW a activarse
@@ -25,7 +25,7 @@ self.addEventListener('install', e => {
 })
 
 self.addEventListener('activate', e => {
-  console.log('SW aktibatua')
+  //console.log('SW aktibatua')
   const cacheWhitelist = [CACHE_NAME]
 
   e.waitUntil(
@@ -39,7 +39,7 @@ self.addEventListener('activate', e => {
       )
     })
     .then(() => {
-      console.log('Katxe eguneratua')
+      //console.log('Katxe eguneratua')
       // Le indica al SW activar el cache actual
       return self.clients.claim()
     })
@@ -47,13 +47,13 @@ self.addEventListener('activate', e => {
 })
 
 self.addEventListener('fetch', e => {
-  console.log('SW errekuperatzen')
+  //console.log('SW errekuperatzen')
 
   e.respondWith(
     //Miramos si la petición coincide con algún elemento del cache
     caches.match(e.request)
     .then(res => {
-        console.log('Katxea errekuperatzen')
+        //console.log('Katxea errekuperatzen')
         if ( res ) {
           //Si coincide lo retornamos del cache
           return res
@@ -65,13 +65,13 @@ self.addEventListener('fetch', e => {
 })
 
 self.addEventListener('sync', e => {
-  console.log('Atzeko sinkronizazioa aktibatua', e)
+  //console.log('Atzeko sinkronizazioa aktibatua', e)
 
   //Revisamos que la etiqueta de sincronización sea la que definimos o la que emulan las devtools
   if ( e.tag === 'nahieran-tv'
     || e.tag === 'nahieran-tv-program'
     || e.tag === 'nahieran-tv-program-episode'
-    || e.tag === 'nahieran-tv-categories' 
+    || e.tag === 'nahieran-tv-categories'
     || e.tag === 'nahieran-category'
     || e.tag === 'test-tag-from-devtools' ) {
 

@@ -99,7 +99,7 @@ export const categoriesSingle = () => {
 
             //Background Sync (kategoria)
             n.serviceWorker.addEventListener('message', e => {
-      		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
+      		    //console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
       		    if( e.data === 'online nahieran-category')
       		    	fetchCategory(localStorage.getItem('category'), true, localStorage.getItem('category-name'))
       		  })

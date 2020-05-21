@@ -79,9 +79,7 @@ export const selectProgram = () => {
         if( e.target.classList.contains('program-id') ) {
 
   		    let data = e.target.getAttribute('data-program')
-
   		  	localStorage.setItem('tv-program', data)
-
           //Background Sync (programak)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
   			    function registerBGSync () {
@@ -101,7 +99,7 @@ export const selectProgram = () => {
 
   			    //Background Sync (programak)
             n.serviceWorker.addEventListener('message', e => {
-      		    console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
+      		    //console.log('Atzeko sinkronizazioa message bidez aktibatua: ', e.data)
       		    if( e.data === 'online nahieran-tv-program' )
       		    	fetchProgram( localStorage.getItem('tv-program'), true )
       		  })

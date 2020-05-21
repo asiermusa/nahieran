@@ -37,6 +37,6 @@
   "author": "@asiermusa",
   "license": "MIT",
   "dependencies": {
-    "dplayer": "^1.21.0"
+    "dplayer": "^1.25.1"
   }
 }
