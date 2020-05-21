@@ -69,8 +69,8 @@ export const categories = () => {
       }
 
       //Aplikaziora sartzen denean egin beharrekoa
-      let data = '//still-castle-99749.herokuapp.com/program-type-list'
-        
+      let data = 'https://still-castle-99749.herokuapp.com/program-type-list'
+
       localStorage.setItem('category-list', data)
 
       //Background Sync (programak)
@@ -86,7 +86,7 @@ export const categories = () => {
           })
         }
         registerBGSync()
-        
+
         //Background Sync (programak)
         n.serviceWorker.addEventListener('message', e => {
           c('Atzeko sinkronizazioa message bidez: ', e.data)

@@ -156,7 +156,7 @@ export const tv = () => {
           localStorage.removeItem('jsonDate')
 
           let reset = true,
-            data= '//still-castle-99749.herokuapp.com/playlist'
+            data= 'https://still-castle-99749.herokuapp.com/playlist'
 
           localStorage.setItem('tv', data)
 
@@ -182,7 +182,7 @@ export const tv = () => {
         fetchAllPrograms(localStorage.getItem('localJson'), false, false)
       }else{
         let reset = true,
-          data = '//still-castle-99749.herokuapp.com/playlist'
+          data = 'https://still-castle-99749.herokuapp.com/playlist'
 
         localStorage.setItem('tv', data)
 

@@ -14,7 +14,7 @@ export const categoriesSingle = () => {
       //Kategoria zerrenda ekarri
   	  function fetchCategory(jsonData, requestFromBGSync, catName) {
 
-		  	let data = jsonData.slice(5),
+		  	let data = jsonData.replace(/^http:\/\//i, 'https://'),
 		  	  tpl = ''
 
         d.querySelector('.off-canvas-menu').classList.remove('is-open')
@@ -74,7 +74,7 @@ export const categoriesSingle = () => {
           var catName = e.target.innerHTML
           let data = e.target.getAttribute('data-category')
 
-          localStorage.setItem('category', data)
+          localStorage.setItem('category', data.replace(/^http:\/\//i, 'https://'))
           localStorage.setItem('category-name', catName)
 
           //Background Sync (kategoria)

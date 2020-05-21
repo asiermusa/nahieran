@@ -30,7 +30,8 @@ export const selectEpisode = () => {
       //episode kargatu
       function fetchEpisode(jsonData, requestFromBGSync) {
 
-        let data = jsonData
+        let data = jsonData.replace(/^http:\/\//i, 'https://')
+
         //Loader erakutsi
         d.querySelector('.loader-episode').classList.add('loader-show')
         d.querySelector('.loader-template-episode').classList.add('loader-show')
@@ -59,11 +60,14 @@ export const selectEpisode = () => {
             d.querySelector('.loader-template-episode').classList.remove('loader-show')
 
             let urlEnd = json.url.slice(-3);
+            let fullVideo = ''
 
             if(urlEnd === 'mp4') {
               urlEnd = json.url
+              fullVideo = json.url
             }else{
               urlEnd = json.formats[6].url
+              fullVideo = json.formats[9].url
             }
 
             if(d.getElementById('dplayer')){
@@ -82,6 +86,9 @@ export const selectEpisode = () => {
             //Bideoaren src kodea aldatu (https bidez funtzionatzeko)
             //d.querySelector(".dplayer-video").setAttribute("src", urlEnd)
 
+            // full video link
+            d.getElementById("fullVideo").setAttribute("onclick", `window.open('${fullVideo}')`)
+
             d.querySelector('.episode__error').classList.remove('show')
 
             d.querySelector('.episode__header').innerHTML = `
@@ -91,7 +98,7 @@ export const selectEpisode = () => {
 
           })
           .catch(err => {
-            localStorage.setItem('tv-program-episode', jsonData)
+            localStorage.setItem('tv-program-episode', jsonData.replace(/^http:\/\//i, 'https://'))
             d.querySelector('.episode__error').innerHTML = 'Konexioak huts egin du'
             d.querySelector('.episode__error').classList.add('show')
           })
@@ -106,7 +113,7 @@ export const selectEpisode = () => {
           let data = e.target.getAttribute('data-episode')
 
           //console.warn(data)
-          localStorage.setItem('tv-program-episode', data.slice(5))
+          localStorage.setItem('tv-program-episode', data.replace(/^http:\/\//i, 'https://'))
 
           //Background Sync (episode)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
@@ -127,7 +134,7 @@ export const selectEpisode = () => {
 
             //Background Sync (episode)
             n.serviceWorker.addEventListener('message', e => {
-              c('Atzeko sinkronizazioa message bidez: ', e.data)
+              //c('Atzeko sinkronizazioa message bidez: ', e.data)
               if( e.data === 'online nahieran-tv-program-episode' || e.data === 'online test-tag-from-devtools' )
                 fetchEpisode(localStorage.getItem('tv-program-episode'), true)
             })
@@ -152,6 +159,7 @@ export const selectEpisode = () => {
         <div id="dplayer"></div>
       </div>
       <div class="episode__error"></div>
+      <div class="episode__notes">Kalitate altuagoan ikusteko egin <a href="#" onclick="window.location='https://twitter.com/erralin'" class="episode__notes-link" id="fullVideo" target="_blank">klik hemen.</a></div>
       <div class="episode__nav"><a href="#" id="episode__back">< Atzera</a></div>
     </div>
     `

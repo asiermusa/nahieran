@@ -14,7 +14,7 @@ export const selectProgram = () => {
       //Programa ekarri (zerrenda)
       function fetchProgram(jsonData, requestFromBGSync) {
 
-        let data = jsonData.slice(5),
+        let data = jsonData.replace(/^http:\/\//i, 'https://'),
           tpl = '',
           date = ''
 
@@ -79,7 +79,7 @@ export const selectProgram = () => {
         if( e.target.classList.contains('program-id') ) {
 
   		    let data = e.target.getAttribute('data-program')
-  		  	localStorage.setItem('tv-program', data)
+  		  	localStorage.setItem('tv-program', data.replace(/^http:\/\//i, 'https://'))
           //Background Sync (programak)
           if ( 'serviceWorker' in n && 'SyncManager' in w ) {
   			    function registerBGSync () {
